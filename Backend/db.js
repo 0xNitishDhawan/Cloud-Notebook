@@ -1,6 +1,8 @@
 const mongoose=require('mongoose')
+const dotenv = require('dotenv');
+dotenv.config();
 // const mongoURI="mongodb+srv://studyvideos789:studyvideos789@cluster0.5fuucpl.mongodb.net/?retryWrites=true&w=majority"
-const mongoURI="mongodb+srv://studyvideos789:studyvideos789@cluster0.5fuucpl.mongodb.net/?retryWrites=true&w=majority"
+const mongoURI=`mongodb+srv://studyvideos789:${process.env.MongoDBPassword}@cluster0.5fuucpl.mongodb.net/?retryWrites=true&w=majority`
 
 const connectToMongo = async () => { 
     await mongoose.connect(mongoURI);
