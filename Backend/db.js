@@ -1,7 +1,8 @@
 const mongoose=require('mongoose')
+// const mongoURI="mongodb+srv://studyvideos789:studyvideos789@cluster0.5fuucpl.mongodb.net/?retryWrites=true&w=majority"
 const mongoURI="mongodb+srv://studyvideos789:studyvideos789@cluster0.5fuucpl.mongodb.net/?retryWrites=true&w=majority"
 
-const connectToMongo = async () => {
+const connectToMongo = async () => { 
     await mongoose.connect(mongoURI);
     console.log("Connected to Mongo successfully");
 }
