@@ -42,4 +42,43 @@ router.post('/createuser',[
     } 
 }) 
 
+router.post('/login',[
+    body('email', "Enter a valid Email").isEmail(), 
+    body('password', "Password cannot be a blank").exists()
+],async (req,res)=>{
+    try {  
+        const errors = validationResult(req); 
+        if(!errors.isEmpty()){
+            return res.status(400).json({errors:errors.array()})
+        }
+        const {email,password}=req.body
+
+        let user= await User.findOne({email});
+        if(!user){
+            return res.status(400).send({msg:"Please enter correct login credentials."}); 
+        }
+        
+        const passwordCompare= await bcrypt.compare(password, user.password);
+        if(!passwordCompare){
+            return res.status(400).send({msg:'Please enter correct login credentials.'});
+        }
+
+        const data={
+            user:{
+                id:User.id
+            }
+        }
+        var authtoken = jwt.sign(data, jwtSecretKey);
+        res.json({authtoken});  
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(500).send("There is some Internal Server Error");
+    } 
+}) 
+
+
+
+
+
 module.exports=router;  
