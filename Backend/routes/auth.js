@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const jwtSecretKey="abcd$123@1"
 const fetchuser=require('../middleware/fetchuser')
 
-//ROUTE 1: For CREATING the User
+//ROUTE 1: For CREATING the User using POST "api/auth/createuser"
 router.post('/createuser',[
     body('name', "Enter a valid name").isLength({min:3}), 
     body('email', "Enter a valid Email").isEmail(), 
@@ -43,8 +43,7 @@ router.post('/createuser',[
 }) 
 
 
-
-//ROUTE 2: For LOGGING IN the user 
+//ROUTE 2: For LOGGING IN the user using POST "api/auth/login"
 router.post('/login',[
     body('email', "Enter a valid Email").isEmail(), 
     body('password', "Password cannot be a blank").exists()
@@ -81,7 +80,7 @@ router.post('/login',[
 }) 
 
 
-//ROUTE 3: For Getting the DATA of the user 
+//ROUTE 3: For Getting the DATA of the user using POST      Login Required
 router.post('/getuser', fetchuser,async (req,res)=>{
     try {  
         const userID=req.user.id;
@@ -93,9 +92,6 @@ router.post('/getuser', fetchuser,async (req,res)=>{
         res.status(500).send("There is some Internal Server Error");
     } 
 }) 
-
-
-
 
 
 module.exports=router;  
