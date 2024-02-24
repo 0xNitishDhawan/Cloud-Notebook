@@ -15,8 +15,9 @@ router.post('/createuser',[
 ],async (req,res)=>{
     try {  
         const errors = validationResult(req); 
+        let success=false;
         if(!errors.isEmpty()){
-            return res.status(400).json({errors:errors.array()})
+            return res.status(400).json({success,errors:errors.array()})
         }
         
         const salt = await bcrypt.genSaltSync(10);
@@ -24,7 +25,7 @@ router.post('/createuser',[
         
         let user= await User.findOne({email:req.body.email})
         if(user){
-            return res.status(400).send({msg:"User already exists"}); 
+            return res.status(400).send({success,msg:"User already exists"}); 
         }
         user= await User.create({name:req.body.name, email: req.body.email, password: secretPassword})
         const data={
@@ -33,8 +34,8 @@ router.post('/createuser',[
             }
         } 
         var authtoken = jwt.sign(data, jwtSecretKey);
-        
-        res.json({authtoken});   
+        success=true;
+        res.json({success,authtoken});   
     } 
     catch (error) {
         console.error(error);
