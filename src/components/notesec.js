@@ -5,16 +5,16 @@ import AddNote from "./addnote";
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, getNotes } = context;
+  const { notes, getNotes, editNote } = context;
   useEffect( () => {  
      getNotes();
   }, [])
 
-  const [note, setNote]=useState({"etitle":"","edescription":"","etag":""})
+  const [note, setNote]=useState({"id":"","etitle":"","edescription":"","etag":""})
   const handleClick=(e)=>{
-      e.preventDefault();
+      refClose.current.click();
       console.log("Updating the node", note);
-
+      editNote(note.id, note.etitle, note.edescription, note.etag);
 
   }
   const onChange=(e)=>{
@@ -23,9 +23,10 @@ const Notes = () => {
 
   const updateNote=(currentNote)=>{
     ref.current.click();
-    setNote({etitle:currentNote.title, edescription:currentNote.description, etag:currentNote.tag});
+    setNote({id:currentNote._id, etitle:currentNote.title, edescription:currentNote.description, etag:currentNote.tag});
   }
   const ref = useRef(null)
+  const refClose = useRef(null)
 
   return (
     <>
@@ -55,12 +56,10 @@ const Notes = () => {
                     <label htmlFor="tag" className="form-label">Tag</label>
                     <input type="text" className="form-control" id="etag" name='etag' value={note.etag} onChange={onChange}/>
                 </div>
-                
-                <button type="submit" className="btn btn-primary" onClick={handleClick}>Create Note</button>
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
             </div>
           </div>
@@ -69,9 +68,12 @@ const Notes = () => {
 
       <div className="row my-3">
         <h2 className="my-3">Your Notes</h2>
-        {notes.map((note) => {
-          return <Noteitem key={note._id} updateNote={updateNote} note={note} />;
-        })}
+          <div className="container mx-1" style={{fontSize:"large"}}>
+            {notes.length === 0 && "No notes to Display. Please add a new note!"}
+          </div>
+          {notes.map((note) => {
+            return <Noteitem key={note._id} updateNote={updateNote} note={note} />;
+          })}
       </div>
     </>
   );

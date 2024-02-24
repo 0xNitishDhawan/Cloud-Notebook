@@ -19,8 +19,8 @@ router.get('/fetchallnotes',fetchuser, async(req,res)=>{
 
 //ROUTE 2: For Creating the Notes  using POST  "api/notes/addnote"  Login Required       (CREATE)
 router.post("/addnote",fetchuser,[
-    body('title', "Enter a valid Title").isLength({min:3}), 
-    body('description', "Description must be 5 characters long").isLength({min:5}),
+    body('title', "Enter a valid Title").exists(), 
+    body('description', "Description must be 5 characters long").exists(),
     body('tag',"Enter a Tag").exists()
 ],async (req,res)=> {
     try {
@@ -42,8 +42,8 @@ router.post("/addnote",fetchuser,[
 
 //ROUTE 3: To Update Note  using PUT  "api/notes/updatenote/:id"  Login Required        (UPDATE)
 router.put("/updatenote/:id",fetchuser,[
-    body('title', "Enter a valid Title").isLength({min:3}), 
-    body('description', "Description must be 5 characters long").isLength({min:5}),
+    body('title', "Enter a valid Title").exists(), 
+    body('description', "Description must be 5 characters long").exists(),
     body('tag',"Enter a Tag").exists()
 ],async (req,res)=> {
     try {
