@@ -8,7 +8,7 @@ const Notes = () => {
   const { notes, getNotes, editNote } = context;
   useEffect( () => {  
      getNotes();
-  }, [])
+  })
 
   const [note, setNote]=useState({"id":"","etitle":"","edescription":"","etag":""})
   const handleClick=(e)=>{
