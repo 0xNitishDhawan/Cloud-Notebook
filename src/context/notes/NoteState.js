@@ -19,7 +19,7 @@ const NoteState = (props) => {
     const json =await response.json();
     console.log("get notes : ",json)
     setNotes(json);
-  }
+  } 
 
   //ADD a Note
   const addNote = async (title, description, tag) => {
@@ -30,10 +30,11 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNGI1MTU1MzRmMTAwYzZmNmQ1YTcxIn0sImlhdCI6MTcwODUyMzc2MH0.38fY9U_NvhWkN9WYqS6oU8o-DTWrmy2W4HUjk4U3NDE",
       },
-      body: JSON.stringify({ title, description, tag }),
+      body: JSON.stringify({ title, description, tag })
     });
     const json =await response.json();
-
+    
+    console.log("Adding a new note", json);
     let note = {
       _id: "65d6149f21196a215c0272f8",
       user: "65d4b515534f100c6f6d5a71",
@@ -57,6 +58,7 @@ const NoteState = (props) => {
       },
     });
     const json =await response.json();
+    console.log(json) 
 
     const newNotes = notes.filter((note) => {
       return note._id !== id;
@@ -76,6 +78,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json =await response.json();
+    console.log(json)
 
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
