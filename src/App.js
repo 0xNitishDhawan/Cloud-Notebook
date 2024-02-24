@@ -4,6 +4,7 @@ import Navbar from "./components/navbar";
 import Home from "./components/home";
 import About from "./components/about";
 import NoteState from "./context/notes/NoteState";
+import Alert from "./components/alert";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <NoteState>
         <Router>
           <Navbar/>
+            <Alert message="This is an amazing Notepad Application"/>
             <div className="container">
               <Routes>
                 <Route exact path="/" element={<Home/>}/>
