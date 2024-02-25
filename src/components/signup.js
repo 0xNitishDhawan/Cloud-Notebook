@@ -31,7 +31,8 @@ const Signup = (props) => {
     }
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <h2 className='mt-1'>Create your account at iNotebook</h2>
+      <form className='mt-2' onSubmit={handleSubmit}>
           <div className="mb-3">
               <label htmlFor="name" className="form-label">Name</label>
               <input type="text" className="form-control" id="name" onChange={onChange} value={credentials.name} name='name' />
@@ -42,11 +43,11 @@ const Signup = (props) => {
           </div>
           <div className="mb-3">
               <label htmlFor="password" className="form-label">Password</label>
-              <input type="password" className="form-control" id="password" onChange={onChange} value={credentials.password} minLength={5} required name='password'/>
+              <input type="current-password" className="form-control" id="password" onChange={onChange} value={credentials.password} minLength={5} required name='password'/>
           </div>
           <div className="mb-3">
               <label htmlFor="cpassword" className="form-label">Password</label>
-              <input type="password" className="form-control" id="cpassword" onChange={onChange} value={credentials.cpassword} minLength={5} required name='cpassword'/>
+              <input type="current-password" className="form-control" id="cpassword" onChange={onChange} value={credentials.cpassword} minLength={5} required name='cpassword'/>
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
       </form>

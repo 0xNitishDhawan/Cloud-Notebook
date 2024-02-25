@@ -1,12 +1,14 @@
-import React from 'react'
-// import NoteContext from '../context/notes/NoteContext';
+import React,{useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const About = () => {
-  // const a = useContext(NoteContext);
-  // useEffect(()=>{
-  //   a.update();
-  //   // eslint-disable-next-line
-  // },[]);
+  const navigate=useNavigate();
+  useEffect(() => {  
+    if(!localStorage.getItem('token')){
+      navigate('/login');
+    }    // eslint-disable-next-line
+  }, [])
+  
   return (
     <div>This is about  page</div>
   )
