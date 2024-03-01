@@ -21,7 +21,6 @@ const Notes = (props) => {
   const [note, setNote]=useState({"id":"","etitle":"","edescription":"","etag":""})
   const handleClick=(e)=>{
       refClose.current.click();
-      console.log("Updating the node", note);
       editNote(note.id, note.etitle, note.edescription, note.etag);
       props.showAlert("Updated Note Successfully","success");
 
